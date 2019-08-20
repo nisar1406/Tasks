@@ -9,16 +9,17 @@ import java.util.ArrayList;
 import com.MT.group5.tasks.taskDay1.InterestCalculator;
 
 public class ReadingFile {
-	public static ArrayList readingCSV(String file) {
+	public static final String csvDellimeter = ",";
+
+	public static ArrayList<ArrayList<Double>> readingCSV(String file) {
 		double principle, rate;
 		int years;
 		ArrayList<Double> list_si = new ArrayList<Double>();
 		ArrayList<Double> list_ci = new ArrayList<Double>();
-		ArrayList<ArrayList> arr = new ArrayList<ArrayList>();
-//		String csvFile = file;
+		ArrayList<ArrayList<Double>> arr = new ArrayList<>();
 		BufferedReader br = null;
 		String line = "";
-		String cvsSplitBy = ",";
+
 		try {
 			br = new BufferedReader(new FileReader(file));
 			int iteration = 0;
@@ -27,7 +28,7 @@ public class ReadingFile {
 					iteration++;
 					continue;
 				}
-				String[] value = line.split(cvsSplitBy);
+				String[] value = line.split(csvDellimeter);
 
 				System.out
 						.println("Values [Principle= " + value[0] + ", Rate=" + value[1] + ", Years=" + value[2] + "]");
@@ -46,7 +47,8 @@ public class ReadingFile {
 			arr.add(list_ci);
 
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println("File not found");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
